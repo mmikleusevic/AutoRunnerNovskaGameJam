@@ -16,9 +16,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float slowdownDuration = 1f;
     [SerializeField] private float recoverDuration = 2f;
     [SerializeField] private float speedSlowdownMultiplier = 10f;
+    [SerializeField] private float slideTime = 0.5f;
     
-    private Rigidbody rb;
+    public bool IsSliding { get; private set; }
 
+    private Rigidbody rb;
+    private Animator animator;
+    
     private Lane currentLane;
     private Lane nextLane;
     private int targetPositionX;
@@ -26,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -63,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
         }
+        else if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
+        {
+            StartCoroutine(Slide());
+        }
+        
+        animator.SetBool(GameStrings.IS_GROUNDED, IsGrounded());
         
         if (currentLane == nextLane) return;
         
@@ -145,6 +156,17 @@ public class PlayerMovement : MonoBehaviour
     private void CalculateSpeed()
     {
         rb.linearVelocity = transform.forward * speed;
+    }
+
+    private IEnumerator Slide()
+    {
+        animator.SetBool(GameStrings.IS_SLIDING, IsSliding);
+        IsSliding = true;
+        
+        yield return new WaitForSeconds(slideTime);
+        
+        IsSliding = false;
+        animator.SetBool(GameStrings.IS_SLIDING, IsSliding);
     }
     
     // For IsGrounded Testing Gizmos

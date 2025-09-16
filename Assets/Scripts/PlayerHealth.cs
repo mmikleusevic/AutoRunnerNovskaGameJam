@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static event Action OnPlayerDeath;
     public static event Action OnPlayerTookAHit;
     
     [SerializeField] private int maxHits = 2;
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         currentHits++;
         
         OnPlayerTookAHit?.Invoke();
+
+        if (currentHits >= maxHits) OnPlayerDeath?.Invoke();
     }
-    
 }
