@@ -1,30 +1,38 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
     public static event Action OnPlayerCaught;
     
-    [SerializeField] private Transform player;
-    [SerializeField] private float followDistance = 2f;
+    [SerializeField] private PlayerHealth player;
     [SerializeField] private float laneFollowSpeed = 10f;
     [SerializeField] private float verticalFollowSpeed = 10f;
+    [SerializeField] private float reduceDistanceDuration = 1f;
+    
+    private float followDistance;
+
+    private void Awake()
+    {
+        followDistance = player.MaxHits;
+    }
 
     private void OnEnable()
     {
-        PlayerHealth.OnPlayerCaught += CatchUpToPlayer;
+        PlayerHealth.OnPlayerTookAHit += ReduceFollowDistance;
     }
 
     private void OnDisable()
     {
-        PlayerHealth.OnPlayerCaught -= CatchUpToPlayer;
+        PlayerHealth.OnPlayerTookAHit -= ReduceFollowDistance;
     }
 
     private void LateUpdate()
     {
         if (!player) return;
 
-        Vector3 targetPos = player.position;
+        Vector3 targetPos = player.transform.position;
         
         targetPos.z -= followDistance;
 
@@ -36,9 +44,25 @@ public class FollowPlayer : MonoBehaviour
         transform.position = newPos;
     }
 
-    private void CatchUpToPlayer()
+    private void ReduceFollowDistance()
     {
-        followDistance--;
+        StartCoroutine(ReduceFollowDistanceCoroutine());
+    }
+
+    private IEnumerator ReduceFollowDistanceCoroutine()
+    {
+        float startDistance = followDistance;
+        float targetDistance = followDistance - 1f;
+        float elapsed = 0f;
+
+        while (elapsed < reduceDistanceDuration)
+        {
+            elapsed += Time.deltaTime;
+            followDistance = Mathf.Lerp(startDistance, targetDistance, elapsed / reduceDistanceDuration);
+            yield return null;
+        }
+
+        followDistance = targetDistance;
     }
 
     private void OnTriggerEnter(Collider other)
