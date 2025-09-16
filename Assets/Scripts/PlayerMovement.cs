@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Transform groundCheckOrigin;
-    
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed;
     [SerializeField] private float laneChangeSpeed;
@@ -22,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
+    private CapsuleCollider capsuleCollider;
     private Coroutine slideCoroutine;
     
     private Lane currentLane;
@@ -32,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.SphereCast(
-            groundCheckOrigin.position,
+            transform.position + Vector3.up,
             sphereRadius,
             Vector3.down,
             out RaycastHit hit,
@@ -185,13 +185,11 @@ public class PlayerMovement : MonoBehaviour
     // For IsGrounded Testing Gizmos
     // private void OnDrawGizmosSelected()
     // {
-    //     if (groundCheckOrigin == null) return;
-    //
     //     bool grounded = IsGrounded();
     //
     //     Gizmos.color = grounded ? Color.green : Color.red;
-    //     
-    //     Vector3 start = groundCheckOrigin.position;
+    //     Vector3 start = transform.position + Vector3.up;
+    //     Debug.Log(start);
     //     
     //     Vector3 end = start + Vector3.down * checkDistance;
     //     

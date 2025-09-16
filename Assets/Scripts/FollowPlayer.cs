@@ -18,7 +18,6 @@ public class FollowPlayer : MonoBehaviour
     private void Awake()
     {
         followDistance = player.MaxHits + distanceOffset;
-        Debug.Log(followDistance);
         transform.position = new Vector3(transform.position.x, transform.position.y, -followDistance);
     }
 
