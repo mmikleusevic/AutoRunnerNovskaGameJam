@@ -7,19 +7,9 @@ public class PlayerHealth : MonoBehaviour
     
     [SerializeField] private int maxHits = 2;
     public int MaxHits => maxHits;
-    
-    private int currentHits;
-
-    private void Start()
-    {
-        currentHits = 0;
-    }
 
     public void TakeAHit()
     {
-        currentHits++;
-        
         OnPlayerTookAHit?.Invoke();
     }
-    
 }

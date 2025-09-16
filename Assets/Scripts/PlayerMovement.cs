@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Transform groundCheckOrigin;
-    
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed;
     [SerializeField] private float laneChangeSpeed;
@@ -16,9 +14,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float slowdownDuration = 1f;
     [SerializeField] private float recoverDuration = 2f;
     [SerializeField] private float speedSlowdownMultiplier = 10f;
+    [SerializeField] private float slideTime = 0.5f;
     
-    private Rigidbody rb;
+    public bool IsSliding { get; private set; }
 
+    private Rigidbody rb;
+    private Animator animator;
+    private CapsuleCollider capsuleCollider;
+    private Coroutine slideCoroutine;
+    
     private Lane currentLane;
     private Lane nextLane;
     private int targetPositionX;
@@ -26,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
@@ -57,12 +63,20 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
+            StopSliding();
+            
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
         else if (Input.GetKeyDown(KeyCode.S) && !IsGrounded())
         {
             rb.AddForce(Vector3.down * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
         }
+        else if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
+        {
+            slideCoroutine = StartCoroutine(Slide());
+        }
+        
+        animator.SetBool(GameEvents.IsGrounded, IsGrounded());
         
         if (currentLane == nextLane) return;
         
@@ -95,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.SphereCast(
-            groundCheckOrigin.position,
+            transform.position + Vector3.up,
             sphereRadius,
             Vector3.down,
             out RaycastHit hit,
@@ -146,17 +160,36 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.linearVelocity = transform.forward * speed;
     }
+
+    private void StopSliding()
+    {
+        if (slideCoroutine != null) StopCoroutine(slideCoroutine);
+        SetIsSliding(false);
+    }
+
+    private IEnumerator Slide()
+    {
+        SetIsSliding(true);
+        
+        yield return new WaitForSeconds(slideTime);
+        
+        SetIsSliding(false);
+    }
+
+    private void SetIsSliding(bool value)
+    {
+        IsSliding = value;
+        animator.SetBool(GameEvents.IsSliding, IsSliding);
+    }
     
     // For IsGrounded Testing Gizmos
     // private void OnDrawGizmosSelected()
     // {
-    //     if (groundCheckOrigin == null) return;
-    //
     //     bool grounded = IsGrounded();
     //
     //     Gizmos.color = grounded ? Color.green : Color.red;
-    //     
-    //     Vector3 start = groundCheckOrigin.position;
+    //     Vector3 start = transform.position + Vector3.up;
+    //     Debug.Log(start);
     //     
     //     Vector3 end = start + Vector3.down * checkDistance;
     //     

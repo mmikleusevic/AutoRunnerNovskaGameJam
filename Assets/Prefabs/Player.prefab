@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7511136334177186119}
   - component: {fileID: 1415806597509782508}
   - component: {fileID: 7845143329241512863}
+  - component: {fileID: 5513301609436023148}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -168,6 +169,7 @@ MonoBehaviour:
   slowdownDuration: 1
   recoverDuration: 2
   speedSlowdownMultiplier: 10
+  slideTime: 0.5
 --- !u!114 &7845143329241512863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,3 +183,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHits: 2
+--- !u!95 &5513301609436023148
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140372356980296986}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 661370466900cf74293add1ca4e41c6a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
