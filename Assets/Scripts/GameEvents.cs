@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    public static string IS_GROUNDED = "isGrounded";
-    public static string IS_SLIDING = "isSliding";
+    private const string IS_GROUNDED = "isGrounded";
+    private const string IS_SLIDING = "isSliding";
+    
+    public static readonly int IsGrounded = Animator.StringToHash(IS_GROUNDED);
+    public static readonly int IsSliding = Animator.StringToHash(IS_SLIDING);
 }

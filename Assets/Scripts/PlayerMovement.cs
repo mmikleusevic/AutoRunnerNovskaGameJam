@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             slideCoroutine = StartCoroutine(Slide());
         }
         
-        animator.SetBool(GameEvents.IS_GROUNDED, IsGrounded());
+        animator.SetBool(GameEvents.IsGrounded, IsGrounded());
         
         if (currentLane == nextLane) return;
         
@@ -164,18 +164,22 @@ public class PlayerMovement : MonoBehaviour
     private void StopSliding()
     {
         if (slideCoroutine != null) StopCoroutine(slideCoroutine);
-        IsSliding = false;
-        animator.SetBool(GameEvents.IS_SLIDING, IsSliding);
+        SetIsSliding(false);
     }
 
     private IEnumerator Slide()
     {
-        animator.SetBool(GameEvents.IS_SLIDING, IsSliding);
-        IsSliding = true;
+        SetIsSliding(true);
+        
         yield return new WaitForSeconds(slideTime);
         
-        IsSliding = false;
-        animator.SetBool(GameEvents.IS_SLIDING, IsSliding);
+        SetIsSliding(false);
+    }
+
+    private void SetIsSliding(bool value)
+    {
+        IsSliding = value;
+        animator.SetBool(GameEvents.IsSliding, IsSliding);
     }
     
     // For IsGrounded Testing Gizmos
