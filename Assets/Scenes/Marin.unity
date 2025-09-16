@@ -1180,14 +1180,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2910554103213866484, guid: bd0b5bba76895794d93994acf2b06e9f, type: 3}
-      propertyPath: torqueForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910554103213866484, guid: bd0b5bba76895794d93994acf2b06e9f, type: 3}
-      propertyPath: destroyAfter
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5318295489640550927, guid: bd0b5bba76895794d93994acf2b06e9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
