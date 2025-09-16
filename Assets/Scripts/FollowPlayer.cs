@@ -7,15 +7,19 @@ public class FollowPlayer : MonoBehaviour
     public static event Action OnPlayerCaught;
     
     [SerializeField] private PlayerHealth player;
+    
     [SerializeField] private float laneFollowSpeed = 10f;
     [SerializeField] private float verticalFollowSpeed = 10f;
     [SerializeField] private float reduceDistanceDuration = 1f;
+    [SerializeField] private float distanceOffset = 0.5f;
     
     private float followDistance;
 
     private void Awake()
     {
-        followDistance = player.MaxHits;
+        followDistance = player.MaxHits + distanceOffset;
+        Debug.Log(followDistance);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -followDistance);
     }
 
     private void OnEnable()
