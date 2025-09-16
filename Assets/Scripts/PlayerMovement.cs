@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(newPosition);
 
-        if (Mathf.Abs(position.x - targetPositionX) > 0.01f) return;
+        if (Mathf.Abs(position.x - targetPositionX) > 0.1f) return;
         
         currentLane = nextLane;
         transform.position = new Vector3(targetPositionX, position.y, position.z);
@@ -120,23 +120,34 @@ public class PlayerMovement : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             speed = Mathf.Lerp(originalSpeed, minSpeed, elapsed / slowdownDuration);
+            CalculateSpeed();
             yield return null;
         }
 
         speed = minSpeed;
+
+        CalculateSpeed();
         
         elapsed = 0f;
         while (elapsed < recoverDuration)
         {
             elapsed += Time.deltaTime;
             speed = Mathf.Lerp(minSpeed, originalSpeed, elapsed / recoverDuration);
+            CalculateSpeed();
             yield return null;
         }
 
         speed = originalSpeed;
+
+        CalculateSpeed();
+    }
+
+    private void CalculateSpeed()
+    {
+        rb.linearVelocity = transform.forward * speed;
     }
     
-    // For IsGrounded Testing
+    // For IsGrounded Testing Gizmos
     // private void OnDrawGizmosSelected()
     // {
     //     if (groundCheckOrigin == null) return;

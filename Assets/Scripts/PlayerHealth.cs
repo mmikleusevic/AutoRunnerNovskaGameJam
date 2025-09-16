@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static event Action OnPlayerCaught;
     public static event Action OnPlayerTookAHit;
     
     [SerializeField] private int maxHits = 2;
+    public int MaxHits => maxHits;
     
     private int currentHits;
 
@@ -20,7 +20,6 @@ public class PlayerHealth : MonoBehaviour
         currentHits++;
         
         OnPlayerTookAHit?.Invoke();
-
-        if (currentHits >= maxHits) OnPlayerCaught?.Invoke();
     }
+    
 }
