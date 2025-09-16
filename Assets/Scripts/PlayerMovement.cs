@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
+    private Coroutine slideCoroutine;
     
     private Lane currentLane;
     private Lane nextLane;
@@ -62,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
+            StopSliding();
+            
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
         else if (Input.GetKeyDown(KeyCode.S) && !IsGrounded())
@@ -70,10 +73,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
         {
-            StartCoroutine(Slide());
+            slideCoroutine = StartCoroutine(Slide());
         }
         
-        animator.SetBool(GameStrings.IS_GROUNDED, IsGrounded());
+        animator.SetBool(GameEvents.IS_GROUNDED, IsGrounded());
         
         if (currentLane == nextLane) return;
         
@@ -158,15 +161,21 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = transform.forward * speed;
     }
 
+    private void StopSliding()
+    {
+        if (slideCoroutine != null) StopCoroutine(slideCoroutine);
+        IsSliding = false;
+        animator.SetBool(GameEvents.IS_SLIDING, IsSliding);
+    }
+
     private IEnumerator Slide()
     {
-        animator.SetBool(GameStrings.IS_SLIDING, IsSliding);
+        animator.SetBool(GameEvents.IS_SLIDING, IsSliding);
         IsSliding = true;
-        
         yield return new WaitForSeconds(slideTime);
         
         IsSliding = false;
-        animator.SetBool(GameStrings.IS_SLIDING, IsSliding);
+        animator.SetBool(GameEvents.IS_SLIDING, IsSliding);
     }
     
     // For IsGrounded Testing Gizmos
