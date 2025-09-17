@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     
     private Lane currentLane;
     private Lane nextLane;
-    private int targetPositionX;
+    private float targetPositionX;
     private float speed;
 
     private void Awake()
@@ -46,34 +46,48 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.OnPlayerTookAHit += SlowDown;
+        FinishLine.OnFinish += OnFinish;
     }
     
     private void OnDisable()
     {
         PlayerHealth.OnPlayerTookAHit -= SlowDown;
+        FinishLine.OnFinish -= OnFinish;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && nextLane > Lane.Left)
+        if (Input.GetKeyDown(KeyCode.A) && nextLane == Lane.Middle)
         {
-            nextLane += (int)Lane.Left;
+            StopSlowDown();
+            nextLane = Lane.Left;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && nextLane < Lane.Right)
+        else if (Input.GetKeyDown(KeyCode.A) && nextLane == Lane.Right)
         {
-            nextLane += (int)Lane.Right;
+            StopSlowDown();
+            nextLane = Lane.Middle;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.D) && nextLane == Lane.Middle)
+        {
+            StopSlowDown();
+            nextLane = Lane.Right;
+        }
+        else if (Input.GetKeyDown(KeyCode.D) && nextLane == Lane.Left)
+        {
+            StopSlowDown();
+            nextLane = Lane.Middle;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             StopSliding();
             StopSlowDown();
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-        else if (Input.GetKeyDown(KeyCode.S) && !IsGrounded())
+        if (Input.GetKeyDown(KeyCode.S) && !IsGrounded())
         {
             rb.AddForce(Vector3.down * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
         }
-        else if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
         {
             StopSlowDown();
             slideCoroutine = StartCoroutine(Slide());
@@ -83,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (currentLane == nextLane) return;
         
-        targetPositionX = (int)nextLane;
+        targetPositionX = LaneData.Lanes[nextLane];
     }
 
     private void FixedUpdate()
@@ -101,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         
         newPosition += transform.forward * (speed * Time.fixedDeltaTime);
 
+        Debug.Log(rb.linearVelocity);
         rb.MovePosition(newPosition);
 
         if (Mathf.Abs(position.x - targetPositionX) > 0.1f) return;
@@ -203,7 +218,14 @@ public class PlayerMovement : MonoBehaviour
         IsSliding = value;
         animator.SetBool(GameEvents.IsSliding, IsSliding);
     }
-    
+
+    private void OnFinish()
+    {
+        animator.SetTrigger(GameEvents.WIN);
+        rb.linearVelocity = Vector3.zero;
+        enabled = false;
+    }
+
     // For IsGrounded Testing Gizmos
     // private void OnDrawGizmosSelected()
     // {

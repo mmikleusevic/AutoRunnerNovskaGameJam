@@ -47,7 +47,7 @@ public class CollectibleSpawner : MonoBehaviour
                     }
                 }
 
-                Vector3 spawnPosition = new Vector3((int)lane, yPosition, zPosition);
+                Vector3 spawnPosition = new Vector3(LaneData.Lanes[lane], yPosition, zPosition);
                 Instantiate(collectiblePrefab, spawnPosition, collectiblePrefab.transform.rotation);
             }
         }

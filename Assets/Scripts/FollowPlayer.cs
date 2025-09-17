@@ -25,11 +25,13 @@ public class FollowPlayer : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.OnPlayerTookAHit += ReduceFollowDistance;
+        FinishLine.OnFinish += OnFinish;
     }
 
     private void OnDisable()
     {
         PlayerHealth.OnPlayerTookAHit -= ReduceFollowDistance;
+        FinishLine.OnFinish -= OnFinish;
     }
 
     private void FixedUpdate()
@@ -78,5 +80,10 @@ public class FollowPlayer : MonoBehaviour
         {
             OnPlayerCaught?.Invoke();
         }
+    }
+
+    private void OnFinish()
+    {
+        enabled = false;
     }
 }

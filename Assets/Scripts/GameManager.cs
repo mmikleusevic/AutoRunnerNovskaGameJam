@@ -39,12 +39,14 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded; 
         FollowPlayer.OnPlayerCaught += GameOver;
+        FinishLine.OnFinish += Win;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded; 
         FollowPlayer.OnPlayerCaught -= GameOver;
+        FinishLine.OnFinish -= Win;
     }
 
 
@@ -63,6 +65,11 @@ public class GameManager : MonoBehaviour
     
     //TODO do something with this
     private void GameOver()
+    {
+        isGameOver = true;
+    }
+
+    private void Win()
     {
         isGameOver = true;
     }

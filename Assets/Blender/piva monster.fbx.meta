@@ -34,8 +34,8 @@ ModelImporter:
       name: IdleBeer
       takeName: Armature.001|Armature.001Action
       internalID: 2264077025236624520
-      firstFrame: 0
-      lastFrame: 110
+      firstFrame: 67
+      lastFrame: 97
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

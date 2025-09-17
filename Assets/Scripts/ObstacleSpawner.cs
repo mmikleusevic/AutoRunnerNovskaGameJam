@@ -26,8 +26,9 @@ public class ObstacleSpawner : MonoBehaviour
             
             Lane lane = lanes[Random.Range(0, lanes.Length)];
 
-            Vector3 spawnPos = new Vector3((int)lane, obstaclePrefab.transform.position.y, zPosition);
-            Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+            Vector3 spawnPosition = new Vector3(LaneData.Lanes[lane], obstaclePrefab.transform.position.y, zPosition);
+
+            Instantiate(obstaclePrefab, spawnPosition, obstaclePrefab.transform.rotation);
         }
     }
 }
