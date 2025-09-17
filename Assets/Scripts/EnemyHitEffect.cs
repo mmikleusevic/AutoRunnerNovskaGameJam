@@ -4,8 +4,6 @@ using UnityEngine;
 public class EnemyHitEffect : MonoBehaviour
 {
     public GameObject hitEffectPrefab;
-    public float shakeDuration = 0.3f;
-    public float shakeAmount = 0.2f;
 
     public void TriggerHitEffect(Vector3 transformPosition)
     {
