@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 99204584}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1305262, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 3.85, z: -4.5}
+  m_LocalPosition: {x: 0, y: 3.85, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonFollow
   Damping: {x: 1, y: 1, z: 0}
-  ShoulderOffset: {x: 0, y: 1.5, z: 1.5}
+  ShoulderOffset: {x: 0, y: 1.5, z: 2}
   VerticalArmLength: 2
   CameraSide: 0.3
   CameraDistance: 6
@@ -733,7 +733,7 @@ Transform:
   m_GameObject: {fileID: 1391544037}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1305262, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 3.85, z: -4.5}
+  m_LocalPosition: {x: 0, y: 3.85, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1121,7 +1121,7 @@ MonoBehaviour:
     m_Bits: 64
   speed: 5
   laneChangeSpeed: 50
-  jumpForce: 750
+  jumpForce: 850
   sphereRadius: 0.5
   checkDistance: 1
   foreDownMultiplier: 2

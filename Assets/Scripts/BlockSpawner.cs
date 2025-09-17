@@ -6,6 +6,7 @@ public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] blockPrefabs;
     [SerializeField] private FinishLine finishBlockPrefab;
+    [SerializeField] private CollectibleSpawner collectibleSpawner;
     
     [SerializeField] private float zOffset;
     [SerializeField] private int maxBlocks;
@@ -25,6 +26,7 @@ public class BlockSpawner : MonoBehaviour
 
         if (blockPrefabs.Length == 0)
         {
+            collectibleSpawner.SpawnCollectibles(60);
             Time.timeScale = 1;
             return;
         }
@@ -42,7 +44,11 @@ public class BlockSpawner : MonoBehaviour
         
         Vector3 finishSpawnPosition = new Vector3(finishBlockPrefab.transform.position.x,
             finishBlockPrefab.transform.position.y + zOffset * i, finishBlockPrefab.transform.position.z);
-        Instantiate(finishBlockPrefab, finishSpawnPosition, finishBlockPrefab.transform.rotation);
+        FinishLine finish = Instantiate(finishBlockPrefab, finishSpawnPosition, finishBlockPrefab.transform.rotation);
+        
+        float maxZPosition = finish.transform.position.z - zOffset / 2;
+        
+        collectibleSpawner.SpawnCollectibles(maxZPosition);
         
         Time.timeScale = 1;
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
+    
     [SerializeField] private float speed;
     [SerializeField] private float laneChangeSpeed;
     [SerializeField] private float jumpForce;
@@ -20,18 +21,16 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
-    private CapsuleCollider capsuleCollider;
     private Coroutine slideCoroutine;
     
     private Lane currentLane;
     private Lane nextLane;
     private int targetPositionX;
-    
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
