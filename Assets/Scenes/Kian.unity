@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1014c677da230946a998a51f18c5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickEffect
-  clickEffect: {fileID: 0}
+  clickEffect: {fileID: 7415378417607208788, guid: 2959867dd178f5e4ebff7c85bc27cc18, type: 3}
 --- !u!1 &289079743 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4565384969697625659, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1014c677da230946a998a51f18c5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickEffect
-  clickEffect: {fileID: 0}
+  clickEffect: {fileID: 7415378417607208788, guid: 2959867dd178f5e4ebff7c85bc27cc18, type: 3}
 --- !u!1 &384373550
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1014c677da230946a998a51f18c5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickEffect
-  clickEffect: {fileID: 0}
+  clickEffect: {fileID: 7415378417607208788, guid: 2959867dd178f5e4ebff7c85bc27cc18, type: 3}
 --- !u!1 &557033126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1014c677da230946a998a51f18c5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickEffect
-  clickEffect: {fileID: 0}
+  clickEffect: {fileID: 7415378417607208788, guid: 2959867dd178f5e4ebff7c85bc27cc18, type: 3}
 --- !u!4 &1866388697
 Transform:
   m_ObjectHideFlags: 0
