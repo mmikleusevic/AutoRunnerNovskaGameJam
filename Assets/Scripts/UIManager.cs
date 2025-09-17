@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +7,19 @@ public class UIManager : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject optionsPanel;
     public GameObject pauseMenuPanel;
+    public GameObject gameOverPanel;
+    public GameObject creditsPanel;
+    
     public bool isGameStarted = false;
+    
     public Slider volumeSlider;
+    
+    public TMP_Text endScoreText;
+    public TMP_Text endTimeText;
 
+    public Timer timer;
+    public ScoreManager scoreManager;
+    
     private void Start()
     {
         ShowMainMenu();
@@ -30,6 +41,8 @@ public class UIManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
         pauseMenuPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        creditsPanel.SetActive(false);
     }
 
     public void QuitGame()
@@ -91,5 +104,68 @@ public class UIManager : MonoBehaviour
         mainMenuPanel.SetActive(true);
         optionsPanel.SetActive(false);
         pauseMenuPanel.SetActive(false);
+    }
+
+    public void ShowEndGamePanel()
+    {
+        Time.timeScale = 0f;
+        isGameStarted = false;
+        
+        mainMenuPanel.SetActive(false);
+        optionsPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
+        creditsPanel.SetActive(false);
+        
+        gameOverPanel.SetActive(true);
+
+        if (timer != null)
+        {
+            float time = timer.elapsedTime;
+            int minutes= Mathf.FloorToInt(time / 60);
+            int seconds = Mathf.FloorToInt(time % 60);
+            endTimeText.text = $"Your time: {minutes:0}:{seconds:00}";
+        }
+        else
+        {
+            endTimeText.text = "N/A";
+        }
+
+        if (scoreManager != null)
+        {
+            endScoreText.text = $"Ribbons collected: {scoreManager.ribbonsCollected}";
+        }
+        else
+        {
+            endScoreText.text = "0";
+        }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        gameOverPanel.SetActive(false);
+        StartGame();
+
+        if (timer != null)
+        {
+            timer.RestartTimer();
+        }
+
+        if (scoreManager != null)
+        {
+            scoreManager.ResetScore();
+        }
+    }
+
+    public void OpenCredits()
+    {
+        creditsPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+    }
+
+    public void BackFromCredits()
+    {
+        creditsPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
     }
 }

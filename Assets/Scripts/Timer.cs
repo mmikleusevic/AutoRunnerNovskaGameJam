@@ -3,7 +3,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    private float elapsedTime = 0f;
+    public float elapsedTime = 0f;
     public TMP_Text timerText;
     public GameObject timerUI;
     public bool isRunning = false;
@@ -52,5 +52,10 @@ public class Timer : MonoBehaviour
         {
             timerUI.SetActive(false);
         }
+    }
+
+    public void RestartTimer()
+    {
+        elapsedTime = 0f;
     }
 }
