@@ -1,42 +1,25 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random; 
+using Unity.Cinemachine;
 
 public class ScreenShake : MonoBehaviour
 {
     public static ScreenShake instance;
-    private Vector3 originalPos;
+
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
+        else
+            Destroy(gameObject);
     }
 
-    public void Shake(float duration, float magnitude)
+    public void Shake(float force = 1f)
     {
-        StartCoroutine(ShakeCoroutine(duration, magnitude));
-    }
-
-    private IEnumerator ShakeCoroutine(float duration, float magnitude)
-    {
-        originalPos = transform.localPosition;
-        
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-
-            transform.localPosition = originalPos + new Vector3(x, y, 0);
-            
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        transform.localPosition = originalPos;
+        if (impulseSource != null)
+            impulseSource.GenerateImpulse(force);
+        else
+            Debug.LogWarning("No CinemachineImpulseSource assigned!");
     }
 }

@@ -13,8 +13,6 @@ public class EnemyHitEffect : MonoBehaviour
         {
             Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
         }
-        
-        ScreenShake.instance?.Shake(shakeDuration, shakeAmount);
     }
 
     private void OnTriggerEnter(Collider other)

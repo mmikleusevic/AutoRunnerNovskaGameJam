@@ -1502,11 +1502,15 @@ PrefabInstance:
         D - move right
 
         Space
-        - jump'
+        - jump
+
+        S - slide
+
+        S while in air - fast fall'
       objectReference: {fileID: 0}
     - target: {fileID: 2576623388121774954, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2576623388121774954, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       propertyPath: m_margin.x
@@ -1518,7 +1522,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: a4580476496d582469797e19df79c5c3, type: 2}
     - target: {fileID: 2576623388121774954, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2576623388121774954, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       propertyPath: m_sharedMaterial
@@ -1660,12 +1664,32 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 4396736377220480805, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396736377220480805, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396736377220480805, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396736377220480805, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4765285109084680529, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4966966619526659870, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966966619526659870, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4966966619526659870, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}

@@ -29,6 +29,8 @@ public class Obstacle : MonoBehaviour
         
         playerHealth.TakeAHit();
         StartCoroutine(Destroy());
+
+        ScreenShake.instance.Shake();
     }
 
     private IEnumerator Destroy()
@@ -39,4 +41,5 @@ public class Obstacle : MonoBehaviour
         yield return new WaitForSeconds(destroyAfter);
         Destroy(gameObject);
     }
+    
 }
