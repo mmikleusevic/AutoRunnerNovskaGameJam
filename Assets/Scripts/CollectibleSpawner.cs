@@ -48,7 +48,7 @@ public class CollectibleSpawner : MonoBehaviour
                 }
 
                 Vector3 spawnPosition = new Vector3((int)lane, yPosition, zPosition);
-                Instantiate(collectiblePrefab, spawnPosition, Quaternion.identity);
+                Instantiate(collectiblePrefab, spawnPosition, collectiblePrefab.transform.rotation);
             }
         }
     }

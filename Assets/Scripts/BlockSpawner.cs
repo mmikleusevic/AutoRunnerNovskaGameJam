@@ -7,6 +7,7 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] private GameObject[] blockPrefabs;
     [SerializeField] private FinishLine finishBlockPrefab;
     [SerializeField] private CollectibleSpawner collectibleSpawner;
+    [SerializeField] private ObstacleSpawner obstacleSpawner;
     
     [SerializeField] private float zOffset;
     [SerializeField] private int maxBlocks;
@@ -26,7 +27,9 @@ public class BlockSpawner : MonoBehaviour
 
         if (blockPrefabs.Length == 0)
         {
+            //TODO testing
             collectibleSpawner.SpawnCollectibles(60);
+            obstacleSpawner.SpawnObstacles(60);
             Time.timeScale = 1;
             return;
         }
@@ -49,6 +52,7 @@ public class BlockSpawner : MonoBehaviour
         float maxZPosition = finish.transform.position.z - zOffset / 2;
         
         collectibleSpawner.SpawnCollectibles(maxZPosition);
+        obstacleSpawner.SpawnObstacles(maxZPosition);
         
         Time.timeScale = 1;
     }
