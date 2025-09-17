@@ -3,8 +3,23 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
+    public static event Action OnFinish;
+    
+    [SerializeField] private ParticleSystem[] particles;
+    [SerializeField] private GameObject objectToDisable;
+    
     private void OnTriggerEnter(Collider other)
     {
-        //TODO player finished
+        if (other.TryGetComponent(out PlayerMovement playerMovement))
+        {
+            OnFinish?.Invoke();
+            objectToDisable.SetActive(false);
+            
+            foreach (ParticleSystem particleSystem in particles)
+            {
+                particleSystem.gameObject.SetActive(true);
+                particleSystem.Play();
+            }
+        }
     }
 }

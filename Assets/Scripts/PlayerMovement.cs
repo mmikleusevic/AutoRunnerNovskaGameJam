@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float speed;
+    
+    [SerializeField] private float maxSpeed;
     [SerializeField] private float laneChangeSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float sphereRadius = 0.4f;
@@ -20,59 +21,75 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
-    private CapsuleCollider capsuleCollider;
     private Coroutine slideCoroutine;
+    private Coroutine slowDownCoroutine;
     
     private Lane currentLane;
     private Lane nextLane;
-    private int targetPositionX;
-    
+    private float targetPositionX;
+    private float speed;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
     {
         currentLane = Lane.Middle;
         nextLane = currentLane;
+        speed = maxSpeed;
         rb.linearVelocity = transform.forward * speed;
     }
 
     private void OnEnable()
     {
         PlayerHealth.OnPlayerTookAHit += SlowDown;
+        FinishLine.OnFinish += OnFinish;
     }
     
     private void OnDisable()
     {
         PlayerHealth.OnPlayerTookAHit -= SlowDown;
+        FinishLine.OnFinish -= OnFinish;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && nextLane > Lane.Left)
+        if (Input.GetKeyDown(KeyCode.A) && nextLane == Lane.Middle)
         {
-            nextLane += (int)Lane.Left;
+            StopSlowDown();
+            nextLane = Lane.Left;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && nextLane < Lane.Right)
+        else if (Input.GetKeyDown(KeyCode.A) && nextLane == Lane.Right)
         {
-            nextLane += (int)Lane.Right;
+            StopSlowDown();
+            nextLane = Lane.Middle;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.D) && nextLane == Lane.Middle)
+        {
+            StopSlowDown();
+            nextLane = Lane.Right;
+        }
+        else if (Input.GetKeyDown(KeyCode.D) && nextLane == Lane.Left)
+        {
+            StopSlowDown();
+            nextLane = Lane.Middle;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             StopSliding();
-            
+            StopSlowDown();
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-        else if (Input.GetKeyDown(KeyCode.S) && !IsGrounded())
+        if (Input.GetKeyDown(KeyCode.S) && !IsGrounded())
         {
             rb.AddForce(Vector3.down * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
         }
-        else if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
         {
+            StopSlowDown();
             slideCoroutine = StartCoroutine(Slide());
         }
         
@@ -80,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (currentLane == nextLane) return;
         
-        targetPositionX = (int)nextLane;
+        targetPositionX = LaneData.Lanes[nextLane];
     }
 
     private void FixedUpdate()
@@ -98,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         
         newPosition += transform.forward * (speed * Time.fixedDeltaTime);
 
+        Debug.Log(rb.linearVelocity);
         rb.MovePosition(newPosition);
 
         if (Mathf.Abs(position.x - targetPositionX) > 0.1f) return;
@@ -121,7 +139,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlowDown()
     {
-        StartCoroutine(SlowDownCoroutine());
+        slowDownCoroutine = StartCoroutine(SlowDownCoroutine());
+    }
+
+    private void StopSlowDown()
+    {
+        if (slowDownCoroutine != null) StopCoroutine(slowDownCoroutine);
+        animator.speed = 1;
+        speed = maxSpeed;
+        CalculateSpeed();
     }
 
     private IEnumerator SlowDownCoroutine()
@@ -129,30 +155,41 @@ public class PlayerMovement : MonoBehaviour
         float originalSpeed = speed;
         float minSpeed = speed / speedSlowdownMultiplier;
         
+        float originalAnimSpeed = animator.speed;
+        float minAnimSpeed = originalAnimSpeed / speedSlowdownMultiplier;
+        
         float elapsed = 0f;
         while (elapsed < slowdownDuration)
         {
             elapsed += Time.deltaTime;
-            speed = Mathf.Lerp(originalSpeed, minSpeed, elapsed / slowdownDuration);
+            float duration = elapsed / slowdownDuration;
+            
+            speed = Mathf.Lerp(originalSpeed, minSpeed, duration);
+            animator.speed = Mathf.Lerp(originalAnimSpeed, minAnimSpeed, duration);
+            
             CalculateSpeed();
             yield return null;
         }
 
         speed = minSpeed;
-
+        animator.speed = minAnimSpeed;
         CalculateSpeed();
         
         elapsed = 0f;
         while (elapsed < recoverDuration)
         {
             elapsed += Time.deltaTime;
-            speed = Mathf.Lerp(minSpeed, originalSpeed, elapsed / recoverDuration);
+            float duration = elapsed / recoverDuration;
+
+            speed = Mathf.Lerp(minSpeed, originalSpeed, duration);
+            animator.speed = Mathf.Lerp(minAnimSpeed, originalAnimSpeed, duration);
+            
             CalculateSpeed();
             yield return null;
         }
 
         speed = originalSpeed;
-
+        animator.speed = originalAnimSpeed;
         CalculateSpeed();
     }
 
@@ -181,7 +218,14 @@ public class PlayerMovement : MonoBehaviour
         IsSliding = value;
         animator.SetBool(GameEvents.IsSliding, IsSliding);
     }
-    
+
+    private void OnFinish()
+    {
+        animator.SetTrigger(GameEvents.WIN);
+        rb.linearVelocity = Vector3.zero;
+        enabled = false;
+    }
+
     // For IsGrounded Testing Gizmos
     // private void OnDrawGizmosSelected()
     // {
