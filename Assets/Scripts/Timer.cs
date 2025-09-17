@@ -3,7 +3,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    private float elapsedTime = 0f;
+    public float elapsedTime = 0f;
     public TMP_Text timerText;
     public GameObject timerUI;
     public bool isRunning = false;
@@ -29,7 +29,7 @@ public class Timer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(time / 60);
         float seconds = time % 60f;
-        return string.Format("{0:00}:{1:00.0}", minutes, seconds);
+        return string.Format("{0:0}:{1:0.0}", minutes, seconds);
     }
 
     public void StartTimer()
@@ -41,5 +41,21 @@ public class Timer : MonoBehaviour
         {
             timerUI.SetActive(true);
         }
+    }
+
+    public void StopTimer()
+    {
+        elapsedTime = 0f;
+        isRunning = false;
+        
+        if (timerUI != null)
+        {
+            timerUI.SetActive(false);
+        }
+    }
+
+    public void RestartTimer()
+    {
+        elapsedTime = 0f;
     }
 }

@@ -10,6 +10,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private float pushUpwardForce = 10f;
     [SerializeField] private float torqueForce = 10f;
     
+    
     private Rigidbody rb;
     
     private void Awake()
@@ -29,6 +30,9 @@ public class Obstacle : MonoBehaviour
         
         playerHealth.TakeAHit();
         StartCoroutine(Destroy());
+
+        ScreenShake.instance.Shake();
+        //VFXManager.instance.PlayHitEffect(transform.position);
     }
 
     private IEnumerator Destroy()
@@ -39,4 +43,5 @@ public class Obstacle : MonoBehaviour
         yield return new WaitForSeconds(destroyAfter);
         Destroy(gameObject);
     }
+    
 }

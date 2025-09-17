@@ -1,0 +1,25 @@
+using System;
+using UnityEngine;
+
+public class EnemyHitEffect : MonoBehaviour
+{
+    public GameObject hitEffectPrefab;
+
+    public void TriggerHitEffect(Vector3 transformPosition)
+    {
+        if (hitEffectPrefab)
+        {
+            Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (CompareTag("Player"))
+        {
+            TriggerHitEffect(transform.position);
+
+            Destroy(gameObject);
+        }
+    }
+}
