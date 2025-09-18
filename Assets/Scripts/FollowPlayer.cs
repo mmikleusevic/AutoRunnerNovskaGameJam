@@ -8,6 +8,7 @@ public class FollowPlayer : MonoBehaviour
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerHealth player;
+    [SerializeField] private  AudioClip audioClip;
     
     [SerializeField] private float laneFollowSpeed = 10f;
     [SerializeField] private float verticalFollowSpeed = 10f;
@@ -78,6 +79,7 @@ public class FollowPlayer : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerHealth playerHealth))
         {
+            SoundManager.Instance.PlayOneShot(audioClip);
             OnPlayerCaught?.Invoke();
         }
     }

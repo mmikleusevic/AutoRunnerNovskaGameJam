@@ -176,7 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837ceeea8e315d64e8cba20d17c53237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowPlayer
+  rb: {fileID: 7381623893393528675}
   player: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 5122e8f3b609ca5448f66103aaa3e5e4, type: 3}
   laneFollowSpeed: 10
   verticalFollowSpeed: 10
   reduceDistanceDuration: 1

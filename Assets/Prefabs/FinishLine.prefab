@@ -343,6 +343,7 @@ MonoBehaviour:
   - {fileID: 907617520954892242}
   - {fileID: 853841987621215081}
   objectToDisable: {fileID: 466764104140781813}
+  audioClip: {fileID: 8300000, guid: 57f62cfcdc098984abe6decf428f4071, type: 3}
 --- !u!1001 &4106122294168561420
 PrefabInstance:
   m_ObjectHideFlags: 0

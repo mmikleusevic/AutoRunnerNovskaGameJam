@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float recoverDuration = 2f;
     [SerializeField] private float speedSlowdownMultiplier = 10f;
     [SerializeField] private float slideTime = 0.5f;
+    
+    [SerializeField] private AudioClip[] hitSounds;
     
     public bool IsSliding { get; private set; }
 
@@ -140,6 +143,12 @@ public class PlayerMovement : MonoBehaviour
     private void SlowDown()
     {
         slowDownCoroutine = StartCoroutine(SlowDownCoroutine());
+    }
+
+    public void PlayHitSound()
+    {
+        int index = Random.Range(0, hitSounds.Length);
+        SoundManager.Instance.PlayOneShot(hitSounds[index]);
     }
 
     private void StopSlowDown()

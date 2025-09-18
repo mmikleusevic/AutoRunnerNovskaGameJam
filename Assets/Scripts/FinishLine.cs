@@ -7,6 +7,7 @@ public class FinishLine : MonoBehaviour
     
     [SerializeField] private ParticleSystem[] particles;
     [SerializeField] private GameObject objectToDisable;
+    [SerializeField] private AudioClip audioClip;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public class FinishLine : MonoBehaviour
         {
             OnFinish?.Invoke();
             objectToDisable.SetActive(false);
+            SoundManager.Instance.PlayOneShot(audioClip);
             
             foreach (ParticleSystem particleSystem in particles)
             {

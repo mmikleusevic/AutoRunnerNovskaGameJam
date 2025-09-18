@@ -8,192 +8,222 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Buildings-Dark-L
-    second: {fileID: 2100000, guid: 89488d66d1508ec439835583d17c5ca0, type: 2}
+    second: {fileID: 2100000, guid: 04a1a220ad3a82042b9f8dda7f31fba7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Buildings-Dark-R
-    second: {fileID: 2100000, guid: 2ea50ede59877e34db2fdcbd3cf31023, type: 2}
+    second: {fileID: 2100000, guid: 425960acc960bfb44bb2b50feda99194, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Buildings-Light-L
-    second: {fileID: 2100000, guid: c16aa24808772f74b9ba437dd2d37c84, type: 2}
+    second: {fileID: 2100000, guid: ea2249375cbc42140989b61838b52bdd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Buildings-Light-R
-    second: {fileID: 2100000, guid: bf77ae5ee21e6fe45af75f6f3868ff95, type: 2}
+    second: {fileID: 2100000, guid: dabd0ce65f1ae0e40af6c4b37fa3302d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Cannon
-    second: {fileID: 2100000, guid: be76c05974522a841802180b0a09d75e, type: 2}
+    second: {fileID: 2100000, guid: a1105ba1cb0840d4b965cb69ab3a75e0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: End
-    second: {fileID: 2100000, guid: 75222b7ed6471e347975c66f9fb6c082, type: 2}
+    second: {fileID: 2100000, guid: 4bace34f356b1fd4bb4d19ad24e79f68, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Fence-L
-    second: {fileID: 2100000, guid: e3a620c8795f4464fb3f7bc5cc0f20e9, type: 2}
+    second: {fileID: 2100000, guid: 5262fad9ac653894d8a4fdc03711a7de, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Fence-R
-    second: {fileID: 2100000, guid: 7efa09ae9a6669349ac4f450a3e2639f, type: 2}
+    second: {fileID: 2100000, guid: ce967647f8d49c043bc7e84ea64cd59d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Grass
-    second: {fileID: 2100000, guid: 374d1263caa0e2b48a8079a27ebd1395, type: 2}
+    second: {fileID: 2100000, guid: 11ec32f4d42891148ae8bad1f0179022, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lamp-Post-L
-    second: {fileID: 2100000, guid: c74f92311117f6e4989591c8ada0994f, type: 2}
+    second: {fileID: 2100000, guid: 67d1fc794e53fa044879e75a2454128f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lamp-Post-R
-    second: {fileID: 2100000, guid: 4cba33f88093b5b4bb374b7e22a787f2, type: 2}
+    second: {fileID: 2100000, guid: ad9373bd5dd2ae44ab736ef0841e3ba8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Logo_sznj
-    second: {fileID: 2100000, guid: 4500e3a96d659d842b6675d32cf15215, type: 2}
+    second: {fileID: 2100000, guid: e1b622ae3e49cb349a856155bfb82254, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Netrubaduri
+    second: {fileID: 2100000, guid: d84b924ef86adf5448473494007e3418, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Road
-    second: {fileID: 2100000, guid: 056e11f52c38b8a489a072c8300e02b4, type: 2}
+    second: {fileID: 2100000, guid: ecc84e87109452745b08a4c852a10973, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road.001
+    second: {fileID: 2100000, guid: 3a5e553129951ec41b8f2f2ff30d0535, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tree
-    second: {fileID: 2100000, guid: dfdec3e64d234fa48bf7e2814d892ad2, type: 2}
+    second: {fileID: 2100000, guid: ab093148b102f1140a2d5cf7c9011be6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tree-Big
-    second: {fileID: 2100000, guid: 97060c0b8d93cd04487cef133978419b, type: 2}
+    second: {fileID: 2100000, guid: 5bea9bd0f58e2a34f99bf5e0cdc5e6db, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: banner3
-    second: {fileID: 2100000, guid: d32b4cb75bc968442928fcc6ef2d339b, type: 2}
+    second: {fileID: 2100000, guid: 618f13d81250b194fa61dd1cee14a475, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: crowd
-    second: {fileID: 2100000, guid: ecbe94ebe9165db46896e2df3c4b52a0, type: 2}
+    second: {fileID: 2100000, guid: e6d8c440da1ceee4ab741e667140fb6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: crowd.001
+    second: {fileID: 2100000, guid: 9813ff543c50fdb43835737a8bbf785f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: crowd2
-    second: {fileID: 2100000, guid: 8af1b35f3fada7b408d09fc3dbdd7147, type: 2}
+    second: {fileID: 2100000, guid: 181955b97bb5c054199c4c2b61a12a19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: crowd2.001
+    second: {fileID: 2100000, guid: 2f71c2f7db18363468104415def91d68, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: novska_za_nju2
-    second: {fileID: 2100000, guid: 79c68e9eced88f74b8c9715b073425e2, type: 2}
+    second: {fileID: 2100000, guid: 09517c0dbd01d5546a1573fc96742f23, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: novska_za_nju3
-    second: {fileID: 2100000, guid: 95f42f5bfec6bf548a549165442a3c6d, type: 2}
+    second: {fileID: 2100000, guid: 4158c0964c9e17541b3e6b84ddb75b15, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Buildings-Dark-L
-    second: {fileID: 2800000, guid: c0577722c577e644f9779e708cb37546, type: 3}
+    second: {fileID: 2800000, guid: 7d96f712b3b9f5145a0376a5294810e0, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Buildings-Dark-R
-    second: {fileID: 2800000, guid: 12db323bc9b39d34e9747021a0953c3a, type: 3}
+    second: {fileID: 2800000, guid: bbb37d01bfcc4bd4ea90421640916464, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Buildings-Light-L
-    second: {fileID: 2800000, guid: 1194e7be76229344ea1de588f040b4db, type: 3}
+    second: {fileID: 2800000, guid: c9dd156ae382ab940b31d3a00c5293b7, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Buildings-Light-R
-    second: {fileID: 2800000, guid: 3d2515c26f70d334e9cf2da1d421bd35, type: 3}
+    second: {fileID: 2800000, guid: 0c890826f384b4d44b055e1d7c746f89, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: End
-    second: {fileID: 2800000, guid: 44fa06c94723b6547a2031b16d66c988, type: 3}
+    second: {fileID: 2800000, guid: 623e7ef8fc3f26f4f9e17addace77361, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Fence-L
-    second: {fileID: 2800000, guid: 731b3052709e1d347afe3ddc0aef236d, type: 3}
+    second: {fileID: 2800000, guid: cb22c66c1fd114643900e92a692001d5, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Fence-R
-    second: {fileID: 2800000, guid: b4610ac0af6ac4d4d8ccce548499a070, type: 3}
+    second: {fileID: 2800000, guid: 54d7b8ad7bda0164f8bb660cfb2ccd66, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Lamp-Post-L
-    second: {fileID: 2800000, guid: b6cdfe2cb61d6a647a7a025224bbac98, type: 3}
+    second: {fileID: 2800000, guid: 3df5ccc348a40b84685115d272c5b968, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Lamp-Post-R
-    second: {fileID: 2800000, guid: 5f5b6fc1467799b47a544a59711de11f, type: 3}
+    second: {fileID: 2800000, guid: d00baf2759b313b42b84f6a99b23f095, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Logo_sznj
-    second: {fileID: 2800000, guid: 27b50ad1c225ede4f82a619179f9faa4, type: 3}
+    second: {fileID: 2800000, guid: 6c2c6cad8beaccc4389ee2914af5de88, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Netrubaduri
+    second: {fileID: 2800000, guid: ba86c265cfbcb464ea0063981c02ab74, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Road
+    second: {fileID: 2800000, guid: 2e7ad78ab8f68f6468e60bcec7dc372b, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Road2
-    second: {fileID: 2800000, guid: bd627a57fcae4544dbe410da859de002, type: 3}
+    second: {fileID: 2800000, guid: b324047bd16840b44a7b26522946d8bf, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Tree
-    second: {fileID: 2800000, guid: 58fc0f9baf60d3f4da25054b6d2635d8, type: 3}
+    second: {fileID: 2800000, guid: 119e6dbbfdced9e4aaaac6d3ededafec, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Tree-Big
-    second: {fileID: 2800000, guid: e15feb29c950c8240b9f85674b6835f8, type: 3}
+    second: {fileID: 2800000, guid: 80b1db451263f3844af34b8477e8680d, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: banner3
-    second: {fileID: 2800000, guid: 3d0610c68627faf4290b45c1da424ec5, type: 3}
+    second: {fileID: 2800000, guid: 7d9ecec3629748740a697c0306e4028e, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crowd
-    second: {fileID: 2800000, guid: 7801859c6bec4b0439919b1804659bde, type: 3}
+    second: {fileID: 2800000, guid: c219fe35ee730b443b0035506408bcdb, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crowd2
-    second: {fileID: 2800000, guid: c3c0ceab0441ec346994cde92724432b, type: 3}
+    second: {fileID: 2800000, guid: ece6193a36cd60842bdcb1f6325bd234, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: novska_za_nju2
-    second: {fileID: 2800000, guid: 60b9335c71d0dcf4b98343a6cf827bb9, type: 3}
+    second: {fileID: 2800000, guid: 53f1a9a8f5251924a955d43c4b03405f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: novska_za_nju3
-    second: {fileID: 2800000, guid: e06b167809f72a7498c2ba6174eb5e1a, type: 3}
+    second: {fileID: 2800000, guid: cad281ae336fc0c45a3fbde5afe6e88f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -12,13 +12,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Buildings-Dark-R
-    second: {fileID: 2100000, guid: 109d09b19846361439308ee5ece464f5, type: 2}
+      name: Buildings-Light-L
+    second: {fileID: 2100000, guid: b3aaf31b370954445a9fba2993ef8e0f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Buildings-Light-L
-    second: {fileID: 2100000, guid: b3aaf31b370954445a9fba2993ef8e0f, type: 2}
+      name: Buildings2-Dark-R
+    second: {fileID: 2100000, guid: fac91252a18b62f4cbbb67561fda6bc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Buildings2-Light-R
+    second: {fileID: 2100000, guid: e290ee4ee36af7d4fbd2979e1579c981, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -88,77 +93,82 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Buildings-Dark-L
-    second: {fileID: 2800000, guid: 48b7e329afd642a46b400cbe97b0cced, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Buildings-Dark-R
-    second: {fileID: 2800000, guid: 5c4ccd4464b414048be5d94a91a5554a, type: 3}
+    second: {fileID: 2800000, guid: 2647dd842cd63574d8147bc86b5eca9c, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Buildings-Light-L
-    second: {fileID: 2800000, guid: b318e40f0ac5f06479fd82de46e9cf25, type: 3}
+    second: {fileID: 2800000, guid: 47ef75ed2e578bd4bba349ea9a367d80, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Buildings2-Dark-R
+    second: {fileID: 2800000, guid: 7f18c83fc4b1f87479072cf4b6e9db2e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Buildings2-Light-R
+    second: {fileID: 2800000, guid: 15968bde927c0f0408720983c3dbe4f2, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Fence-L
-    second: {fileID: 2800000, guid: 17da790ccbd30ad4bbe9c905f34c692c, type: 3}
+    second: {fileID: 2800000, guid: 81e8405228449774191d3b646dd36241, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Fence-R
-    second: {fileID: 2800000, guid: 2bd84fdb3f59e2241bab93cac5160e83, type: 3}
+    second: {fileID: 2800000, guid: 5c33b9928685f5d4fb0c066f0fca8f6c, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Lamp-Post-L
-    second: {fileID: 2800000, guid: 9d07899145f030047ac1e71b9e0430e6, type: 3}
+    second: {fileID: 2800000, guid: c9302607602b03f48b42c2bdd69cace7, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Lamp-Post-R
-    second: {fileID: 2800000, guid: 8c2c4a2f3d372e949bce6be9dd719e7d, type: 3}
+    second: {fileID: 2800000, guid: 94ac5db0e20c96c47a693db1e0fcb1a2, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Logo_sznj
-    second: {fileID: 2800000, guid: 521c492bebd09bd48895513d1159cb86, type: 3}
+    second: {fileID: 2800000, guid: da4ab6059a769334ca98af521b0e502f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Road
-    second: {fileID: 2800000, guid: 15401681a5be4904aba27294e380ba0e, type: 3}
+    second: {fileID: 2800000, guid: ec82a3539c6057141a65e12ffe2ff518, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Tree
-    second: {fileID: 2800000, guid: 38485b640faad1d4ea332d2ce48a5d8a, type: 3}
+    second: {fileID: 2800000, guid: 1983babfe45e22440876c6de2823e532, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Tree-Big
-    second: {fileID: 2800000, guid: 67e6aa2e5296c15459527131a8bd499b, type: 3}
+    second: {fileID: 2800000, guid: 7a083c15510b3204b9ee6c06895c0513, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crowd
-    second: {fileID: 2800000, guid: f96878a352b845047a08af9bf3ccd5b8, type: 3}
+    second: {fileID: 2800000, guid: 485a19e623c891a4a808e2b364adca3b, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crowd2
-    second: {fileID: 2800000, guid: e71cbcd4f1c96dc41afe86582ff2df0c, type: 3}
+    second: {fileID: 2800000, guid: fe6840452680a5f42bdb064ae334708c, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: novska_za_nju2
-    second: {fileID: 2800000, guid: 986c196d6aa1115428e7e93c7111838d, type: 3}
+    second: {fileID: 2800000, guid: a9b90e28f2a28bb4480bf1e3c54711f7, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: novska_za_nju3
-    second: {fileID: 2800000, guid: 66f14741bc6efc042a5bff0230d9e3d5, type: 3}
+    second: {fileID: 2800000, guid: 815bf13f95e95ac46ba6470a7082d7cf, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -10,29 +10,33 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private float pushUpwardForce = 10f;
     [SerializeField] private float torqueForce = 10f;
     
-    
+    private Collider obstacleCollider;
     private Rigidbody rb;
     
     private void Awake()
     {
+        obstacleCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerMovement playerMovement) && playerMovement.IsSliding)
+        PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
+        
+        if (playerMovement) playerMovement.PlayHitSound();
+        
+        if (playerMovement && playerMovement.IsSliding)
         {
+            obstacleCollider.enabled = false;
             StartCoroutine(Destroy());
             return;
         }
         
         if (!other.TryGetComponent(out PlayerHealth playerHealth)) return;
         
+        obstacleCollider.enabled = false;
         playerHealth.TakeAHit();
         StartCoroutine(Destroy());
-
-        ScreenShake.instance.Shake();
-        //VFXManager.instance.PlayHitEffect(transform.position);
     }
 
     private IEnumerator Destroy()
@@ -43,5 +47,4 @@ public class Obstacle : MonoBehaviour
         yield return new WaitForSeconds(destroyAfter);
         Destroy(gameObject);
     }
-    
 }
