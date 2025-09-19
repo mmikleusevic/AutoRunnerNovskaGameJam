@@ -31,6 +31,15 @@ public class PlayerMovement : MonoBehaviour
     private Lane nextLane;
     private float targetPositionX;
     private float speed;
+    private bool moveLeftPressed;
+    private bool moveRightPressed;
+    private bool jumpPressed;
+    private bool downPressed;
+    
+    public void OnLeft() => moveLeftPressed = true;
+    public void OnRight() => moveRightPressed = true;
+    public void OnJump() => jumpPressed = true;
+    public void OnDown() => downPressed = true;
 
     private void Awake()
     {
@@ -60,43 +69,51 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && nextLane == Lane.Middle)
+        if ((Input.GetKeyDown(KeyCode.A) || moveLeftPressed) && currentLane == Lane.Middle)
         {
             StopSlowDown();
             nextLane = Lane.Left;
         }
-        else if (Input.GetKeyDown(KeyCode.A) && nextLane == Lane.Right)
+        else if ((Input.GetKeyDown(KeyCode.A) || moveLeftPressed) && currentLane == Lane.Right)
         {
             StopSlowDown();
             nextLane = Lane.Middle;
         }
-        if (Input.GetKeyDown(KeyCode.D) && nextLane == Lane.Middle)
+        if ((Input.GetKeyDown(KeyCode.D) || moveRightPressed) && currentLane == Lane.Middle)
         {
             StopSlowDown();
             nextLane = Lane.Right;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && nextLane == Lane.Left)
+        else if ((Input.GetKeyDown(KeyCode.D) || moveRightPressed) && currentLane == Lane.Left)
         {
             StopSlowDown();
             nextLane = Lane.Middle;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if ((Input.GetKeyDown(KeyCode.Space) || jumpPressed) && IsGrounded())
         {
             StopSliding();
             StopSlowDown();
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-        if (Input.GetKeyDown(KeyCode.S) && !IsGrounded())
+        if ((Input.GetKeyDown(KeyCode.S) || downPressed))
         {
-            rb.AddForce(Vector3.down * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
-        {
-            StopSlowDown();
-            slideCoroutine = StartCoroutine(Slide());
+            if (IsGrounded())
+            {
+                StopSlowDown();
+                slideCoroutine = StartCoroutine(Slide());
+            }
+            else
+            {
+                rb.AddForce(Vector3.down * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
+            }
         }
         
         animator.SetBool(GameEvents.IsGrounded, IsGrounded());
+
+        moveRightPressed = false;
+        moveLeftPressed = false;
+        jumpPressed = false;
+        downPressed = false;
         
         if (currentLane == nextLane) return;
         
