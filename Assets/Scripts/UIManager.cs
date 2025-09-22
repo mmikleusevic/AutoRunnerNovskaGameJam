@@ -8,9 +8,6 @@ public class UIManager : MonoBehaviour
 {
     public GameObject mainMenuPanel;
     public GameObject optionsPanel;
-    // public GameObject pauseMenuPanel;
-    // public GameObject gameOverPanel;
-    // public GameObject creditsPanel;
     
     public Slider volumeSlider;
 
@@ -24,7 +21,7 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Game");
     }
 
     public void QuitGame()

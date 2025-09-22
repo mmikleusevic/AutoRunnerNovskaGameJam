@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnRight() => moveRightPressed = true;
     public void OnJump() => jumpPressed = true;
     public void OnDown() => downPressed = true;
+    private bool IsChangingLane => currentLane != nextLane;
 
     private void Awake()
     {
@@ -52,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
         currentLane = Lane.Middle;
         nextLane = currentLane;
         speed = maxSpeed;
-        rb.linearVelocity = transform.forward * speed;
     }
 
     private void OnEnable()
@@ -71,40 +71,34 @@ public class PlayerMovement : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.A) || moveLeftPressed) && currentLane == Lane.Middle)
         {
-            StopSlowDown();
             nextLane = Lane.Left;
         }
         else if ((Input.GetKeyDown(KeyCode.A) || moveLeftPressed) && currentLane == Lane.Right)
         {
-            StopSlowDown();
             nextLane = Lane.Middle;
         }
         if ((Input.GetKeyDown(KeyCode.D) || moveRightPressed) && currentLane == Lane.Middle)
         {
-            StopSlowDown();
             nextLane = Lane.Right;
         }
         else if ((Input.GetKeyDown(KeyCode.D) || moveRightPressed) && currentLane == Lane.Left)
         {
-            StopSlowDown();
             nextLane = Lane.Middle;
         }
         if ((Input.GetKeyDown(KeyCode.Space) || jumpPressed) && IsGrounded())
         {
             StopSliding();
-            StopSlowDown();
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
         if ((Input.GetKeyDown(KeyCode.S) || downPressed))
         {
             if (IsGrounded())
             {
-                StopSlowDown();
                 slideCoroutine = StartCoroutine(Slide());
             }
             else
             {
-                rb.AddForce(Vector3.down * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
+                rb.AddForce(-transform.up * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
             }
         }
         
@@ -114,34 +108,55 @@ public class PlayerMovement : MonoBehaviour
         moveLeftPressed = false;
         jumpPressed = false;
         downPressed = false;
-        
-        if (currentLane == nextLane) return;
+
+        if (!IsChangingLane)
+        {
+            CalculateSpeed();
+            return;
+        }
         
         targetPositionX = LaneData.Lanes[nextLane];
     }
 
     private void FixedUpdate()
     {
-        if (currentLane == nextLane) return;
-        
-        MoveToCorrectLane();
+        if (IsChangingLane)
+        {
+            MoveToCorrectLane();
+        }
     }
 
     private void MoveToCorrectLane()
     {
-        Vector3 position = transform.position;
-        Vector3 targetPosition = new Vector3(targetPositionX, position.y, position.z);
-        Vector3 newPosition = Vector3.MoveTowards(position, targetPosition, laneChangeSpeed * Time.fixedDeltaTime);
+        Vector3 rbVelocity = rb.linearVelocity;
         
-        newPosition += transform.forward * (speed * Time.fixedDeltaTime);
+        rbVelocity.z = speed;
 
-        Debug.Log(rb.linearVelocity);
-        rb.MovePosition(newPosition);
+        if (IsChangingLane)
+        {
+            float direction = targetPositionX > rb.position.x ? 1f : -1f;
+            float distanceToTarget = Mathf.Abs(targetPositionX - rb.position.x);
 
-        if (Mathf.Abs(position.x - targetPositionX) > 0.1f) return;
+            float currentLaneSpeed = laneChangeSpeed;
+            if (distanceToTarget < currentLaneSpeed * Time.fixedDeltaTime)
+            {
+                currentLaneSpeed = distanceToTarget / Time.fixedDeltaTime;
+            }
+
+            rbVelocity.x = currentLaneSpeed * direction;
+        }
+        else
+        {
+            rbVelocity.x = 0f;
+        }
+
+        rb.linearVelocity = rbVelocity;
+
+        if (Mathf.Abs(rb.position.x - targetPositionX) > 0.01f) return;
         
+        rb.position = new Vector3(targetPositionX, rb.position.y, rb.position.z);
         currentLane = nextLane;
-        transform.position = new Vector3(targetPositionX, position.y, position.z);
+        rb.linearVelocity = new Vector3(0f, rbVelocity.y, rbVelocity.z);
     }
     
     private bool IsGrounded()
@@ -159,6 +174,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlowDown()
     {
+        if (slowDownCoroutine != null) StopCoroutine(slowDownCoroutine);
         slowDownCoroutine = StartCoroutine(SlowDownCoroutine());
     }
 
@@ -168,21 +184,13 @@ public class PlayerMovement : MonoBehaviour
         SoundManager.Instance.PlayOneShot(hitSounds[index]);
     }
 
-    private void StopSlowDown()
-    {
-        if (slowDownCoroutine != null) StopCoroutine(slowDownCoroutine);
-        animator.speed = 1;
-        speed = maxSpeed;
-        CalculateSpeed();
-    }
-
     private IEnumerator SlowDownCoroutine()
     {
-        float originalSpeed = speed;
-        float minSpeed = speed / speedSlowdownMultiplier;
+        float startSpeed = speed;
+        float minSpeed = maxSpeed / speedSlowdownMultiplier;
         
-        float originalAnimSpeed = animator.speed;
-        float minAnimSpeed = originalAnimSpeed / speedSlowdownMultiplier;
+        float startAnimSpeed = animator.speed;
+        float minAnimSpeed = startAnimSpeed / speedSlowdownMultiplier;
         
         float elapsed = 0f;
         while (elapsed < slowdownDuration)
@@ -190,16 +198,14 @@ public class PlayerMovement : MonoBehaviour
             elapsed += Time.deltaTime;
             float duration = elapsed / slowdownDuration;
             
-            speed = Mathf.Lerp(originalSpeed, minSpeed, duration);
-            animator.speed = Mathf.Lerp(originalAnimSpeed, minAnimSpeed, duration);
+            speed = Mathf.Lerp(startSpeed, minSpeed, duration);
+            animator.speed = Mathf.Lerp(startAnimSpeed, minAnimSpeed, duration);
             
-            CalculateSpeed();
             yield return null;
         }
 
         speed = minSpeed;
         animator.speed = minAnimSpeed;
-        CalculateSpeed();
         
         elapsed = 0f;
         while (elapsed < recoverDuration)
@@ -207,21 +213,23 @@ public class PlayerMovement : MonoBehaviour
             elapsed += Time.deltaTime;
             float duration = elapsed / recoverDuration;
 
-            speed = Mathf.Lerp(minSpeed, originalSpeed, duration);
-            animator.speed = Mathf.Lerp(minAnimSpeed, originalAnimSpeed, duration);
+            speed = Mathf.Lerp(minSpeed, maxSpeed, duration);
+            animator.speed = Mathf.Lerp(minAnimSpeed, 1f, duration);
             
-            CalculateSpeed();
             yield return null;
         }
 
-        speed = originalSpeed;
-        animator.speed = originalAnimSpeed;
-        CalculateSpeed();
+        speed = maxSpeed;
+        animator.speed = 1f;
+
+        yield return null;
     }
 
     private void CalculateSpeed()
     {
-        rb.linearVelocity = transform.forward * speed;
+        Vector3 velocity = rb.linearVelocity;
+        velocity.z = speed;
+        rb.linearVelocity = velocity;
     }
 
     private void StopSliding()

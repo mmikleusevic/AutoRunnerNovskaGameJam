@@ -2454,7 +2454,7 @@ MonoBehaviour:
   zOffsetBetweenSets: 5
   minPerSet: 3
   maxPerSet: 7
-  slope: 0.3
+  slope: 0.27
 --- !u!4 &1557169603
 Transform:
   m_ObjectHideFlags: 0
@@ -3337,7 +3337,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1847700649
@@ -3400,15 +3400,15 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxSpeed: 4
-  laneChangeSpeed: 15
+  maxSpeed: 5
+  laneChangeSpeed: 8
   jumpForce: 550
   sphereRadius: 0.5
   checkDistance: 1
   foreDownMultiplier: 2
   slowdownDuration: 1
   recoverDuration: 2
-  speedSlowdownMultiplier: 10
+  speedSlowdownMultiplier: 4
   slideTime: 1
   hitSounds:
   - {fileID: 8300000, guid: 656a58d1e7dd80548a57c83d7999b60b, type: 3}
@@ -3583,6 +3583,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7381623893393528675, guid: 622ea596a74be484e88aa6c084f9cc54, type: 3}
       propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381623893393528675, guid: 622ea596a74be484e88aa6c084f9cc54, type: 3}
+      propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:

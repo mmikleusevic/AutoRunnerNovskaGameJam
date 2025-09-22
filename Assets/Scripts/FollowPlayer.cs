@@ -26,13 +26,13 @@ public class FollowPlayer : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.OnPlayerTookAHit += ReduceFollowDistance;
-        FinishLine.OnFinish += OnFinish;
+        StopFollowing.OnStopFollowing += OnFinish;
     }
 
     private void OnDisable()
     {
         PlayerHealth.OnPlayerTookAHit -= ReduceFollowDistance;
-        FinishLine.OnFinish -= OnFinish;
+        StopFollowing.OnStopFollowing -= OnFinish;
     }
 
     private void FixedUpdate()

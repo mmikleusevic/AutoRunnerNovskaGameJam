@@ -244,7 +244,7 @@ MonoBehaviour:
   m_margin: {x: -122.39148, y: 0, z: -125.33484, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &92559150
@@ -382,6 +382,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1659633670819700967, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
   m_PrefabInstance: {fileID: 1904949897}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &817131098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817131092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3dfd8a8a6a3c44a949537ee036c0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OptionsText
+  controlsText: {fileID: 2107200707}
+  pcText: A - lijevo kretanje\nD - desno kretanje\nRazmak - skok\nS - uklizivanje\nS
+    dok u zraku - brzi pad
+  mobileText: "\u2190 - lijevo kretanje\\n\u2192 - desno kretanje\\n\u2191 - skok\\n\u2193
+    - uklizivanje\\n\u2193 dok u zraku - brzi pad"
 --- !u!1 &1315449673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,6 +1555,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6037283637659971290, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 105196407}
+    - targetCorrespondingSourceObject: {fileID: 4765285109084680529, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 817131098}
     - targetCorrespondingSourceObject: {fileID: 7344194892796447218, guid: aac57e9f81ff66442a4f95deb7c76d5e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1436752088}
@@ -1587,8 +1607,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 32, y: -116}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -145.23999}
+  m_SizeDelta: {x: 525.5756, y: 290.4799}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2107200707
 MonoBehaviour:
@@ -1610,19 +1630,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'A - lijevo kretanje
-
-    D - desno kretanje
-
-    Razmak - skok
-
-    S
-    - uklizivanje
-
-    S dok u zraku - brzi pad'
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7859b114a7fe6b04d8612b6b7d53c5ab, type: 2}
-  m_sharedMaterial: {fileID: -8528535298072997639, guid: 7859b114a7fe6b04d8612b6b7d53c5ab, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1652,7 +1663,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1684,10 +1695,10 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -240.54028, y: 0, z: -168.41382, w: 0}
+  m_margin: {x: 3.1762695, y: 0, z: -0.9752197, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2107200708
