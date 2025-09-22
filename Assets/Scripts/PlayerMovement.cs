@@ -138,7 +138,9 @@ public class PlayerMovement : MonoBehaviour
             float distanceToTarget = Mathf.Abs(targetPositionX - rb.position.x);
 
             float currentLaneSpeed = laneChangeSpeed;
-            if (distanceToTarget < currentLaneSpeed * Time.fixedDeltaTime)
+            float laneStep = currentLaneSpeed * Time.fixedDeltaTime;
+            
+            if (distanceToTarget < laneStep)
             {
                 currentLaneSpeed = distanceToTarget / Time.fixedDeltaTime;
             }
