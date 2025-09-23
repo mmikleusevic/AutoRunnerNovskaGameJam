@@ -154,7 +154,7 @@ MonoBehaviour:
   - {fileID: 5463732861956000854, guid: 6c9a482285e24f3459a8f767bf09237f, type: 3}
   - {fileID: 6108354211138120506, guid: 4438e0eb56af5334fab0c9511e542289, type: 3}
   - {fileID: 6977378163511220804, guid: dede6556a5a5f6245a986ff6d46f05de, type: 3}
-  - {fileID: 8187321359824340140, guid: 9fa264c988b298d46af2a751f05580f8, type: 3}
+  - {fileID: 5799700985077199836, guid: 9fa264c988b298d46af2a751f05580f8, type: 3}
   startOffsetZ: 10
   maxObstacles: 30
 --- !u!4 &11824545
