@@ -89,17 +89,12 @@ public class GameManager : MonoBehaviour
     
     private void GameOver()
     {
-        Time.timeScale = 0;
-
-        SetLoseText();
-        
-        isGameOver = true;
-        losePanel.SetActive(true);
+        StartCoroutine(GameOverCoroutine());
     }
 
     private IEnumerator GameOverCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Time.timeScale = 0;
 
         SetLoseText();

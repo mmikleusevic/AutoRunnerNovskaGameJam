@@ -262,6 +262,15 @@ public class PlayerMovement : MonoBehaviour
         enabled = false;
     }
 
+    public void OnCaught()
+    {
+        StopAllCoroutines();
+        speed = 0;
+        CalculateSpeed();
+        animator.speed = 1;
+        animator.SetTrigger(GameEvents.Caught);
+    }
+
     // For IsGrounded Testing Gizmos
     // private void OnDrawGizmosSelected()
     // {

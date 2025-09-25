@@ -15,10 +15,14 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private float reduceDistanceDuration = 1f;
     [SerializeField] private float distanceOffset = 0.5f;
     
+    private Animator animator;
+    
     private float followDistance;
+    private bool hasCaught;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         followDistance = player.MaxHits + distanceOffset;
         rb.position = new Vector3(transform.position.x, transform.position.y, player.transform.position.z - followDistance);
     }
@@ -37,7 +41,7 @@ public class FollowPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!player) return;
+        if (!player || hasCaught) return;
 
         Vector3 targetPos = player.transform.position;
         targetPos.z -= followDistance;
@@ -77,8 +81,11 @@ public class FollowPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerHealth playerHealth))
+        if (other.TryGetComponent(out PlayerMovement playerMovement))
         {
+            hasCaught = true;
+            playerMovement.OnCaught();
+            animator.SetTrigger(GameEvents.Pull);
             SoundManager.Instance.PlayOneShot(audioClip);
             OnPlayerCaught?.Invoke();
         }
