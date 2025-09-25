@@ -31,11 +31,6 @@ public class BlockSpawner : MonoBehaviour
             return;
         }
         
-        GameObject blockPrefabZero = blockPrefabs[0];
-        Vector3 spawnPositionStarting = new Vector3(blockPrefabZero.transform.position.x,
-            blockPrefabZero.transform.position.y , blockPrefabZero.transform.position.y - zOffset);
-        Instantiate(blockPrefabZero, spawnPositionStarting, blockPrefabZero.transform.rotation);
-        
         for (i = 0; i < maxBlocks; i++)
         {
             int randomIndex = Random.Range(0, blockPrefabs.Length);   
