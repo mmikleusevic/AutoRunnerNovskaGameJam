@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speedSlowdownMultiplier = 10f;
     [SerializeField] private float slideTime = 0.5f;
     
+    [SerializeField] private PhoneButtons phoneButtons;
     [SerializeField] private AudioClip[] hitSounds;
     
     public bool IsSliding { get; private set; }
@@ -257,6 +258,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnFinish()
     {
+        phoneButtons.Disable();
         animator.SetTrigger(GameEvents.WIN);
         rb.linearVelocity = Vector3.zero;
         enabled = false;
@@ -265,6 +267,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnCaught()
     {
         StopAllCoroutines();
+        phoneButtons.Disable();
         speed = 0;
         CalculateSpeed();
         animator.speed = 1;

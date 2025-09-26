@@ -11,4 +11,9 @@ public class PhoneButtons : MonoBehaviour
         phoneButtons.SetActive(true);
 #endif
     }
+
+    public void Disable()
+    {
+        phoneButtons.SetActive(false);
+    }
 }

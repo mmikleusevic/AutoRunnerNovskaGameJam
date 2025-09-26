@@ -5441,6 +5441,7 @@ MonoBehaviour:
   recoverDuration: 2
   speedSlowdownMultiplier: 4
   slideTime: 1
+  phoneButtons: {fileID: 541946351}
   hitSounds:
   - {fileID: 8300000, guid: 656a58d1e7dd80548a57c83d7999b60b, type: 3}
   - {fileID: 8300000, guid: e8e55df06213757479eb78ec7b372791, type: 3}
