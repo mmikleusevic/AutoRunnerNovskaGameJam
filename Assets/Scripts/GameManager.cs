@@ -56,14 +56,14 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded; 
-        FollowPlayer.OnPlayerCaught += GameOver;
+        PlayerMovement.OnPlayerCaught += GameOver;
         FinishLine.OnFinish += Win;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded; 
-        FollowPlayer.OnPlayerCaught -= GameOver;
+        PlayerMovement.OnPlayerCaught -= GameOver;
         FinishLine.OnFinish -= Win;
     }
 

@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static event Action OnPlayerCaught;
+    
     [SerializeField] private LayerMask groundLayer;
     
     [SerializeField] private float maxSpeed;
@@ -27,7 +29,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Coroutine slideCoroutine;
     private Coroutine slowDownCoroutine;
-    
+
+
+    private bool wasCaught;
     private Lane currentLane;
     private Lane nextLane;
     private float targetPositionX;
@@ -70,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (wasCaught) return;
+        
         if ((Input.GetKeyDown(KeyCode.A) || moveLeftPressed) && currentLane == Lane.Middle)
         {
             nextLane = Lane.Left;
@@ -256,6 +262,16 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool(GameEvents.IsSliding, IsSliding);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out FollowPlayer followPlayer))
+        {
+            wasCaught = true;
+            followPlayer.Ground();
+            StartCoroutine(PlayerCaught());
+        }
+    }
+
     private void OnFinish()
     {
         phoneButtons.Disable();
@@ -264,8 +280,12 @@ public class PlayerMovement : MonoBehaviour
         enabled = false;
     }
 
-    public void OnCaught()
+    private IEnumerator PlayerCaught()
     {
+        yield return new WaitUntil(IsGrounded);
+        
+        OnPlayerCaught?.Invoke();
+        
         StopAllCoroutines();
         phoneButtons.Disable();
         speed = 0;
@@ -273,6 +293,7 @@ public class PlayerMovement : MonoBehaviour
         animator.speed = 1;
         animator.SetTrigger(GameEvents.Caught);
     }
+    
 
     // For IsGrounded Testing Gizmos
     // private void OnDrawGizmosSelected()

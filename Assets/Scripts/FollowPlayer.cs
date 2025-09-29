@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public static event Action OnPlayerCaught;
-
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerHealth player;
     [SerializeField] private  AudioClip audioClip;
@@ -30,30 +28,43 @@ public class FollowPlayer : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.OnPlayerTookAHit += ReduceFollowDistance;
+        PlayerMovement.OnPlayerCaught += PlayerCaught;
         StopFollowing.OnStopFollowing += OnFinish;
     }
 
     private void OnDisable()
     {
         PlayerHealth.OnPlayerTookAHit -= ReduceFollowDistance;
+        PlayerMovement.OnPlayerCaught -= PlayerCaught;
         StopFollowing.OnStopFollowing -= OnFinish;
     }
 
     private void FixedUpdate()
     {
-        if (!player || hasCaught) return;
+        if (hasCaught)
+        {
+            Vector3 targetPosition = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+            Follow(targetPosition);            
+            return;
+        }
+        
+        if (!player) return;
 
-        Vector3 targetPos = player.transform.position;
-        targetPos.z -= followDistance;
+        Follow(player.transform.position);
+    }
 
-        Vector3 currentPos = rb.position;
-        Vector3 newPos = currentPos;
+    private void Follow(Vector3 targetPosition)
+    {
+        targetPosition.z -= followDistance;
 
-        newPos.x = Mathf.Lerp(currentPos.x, targetPos.x, laneFollowSpeed * Time.fixedDeltaTime);
-        newPos.y = Mathf.Lerp(currentPos.y, targetPos.y, verticalFollowSpeed * Time.fixedDeltaTime);
-        newPos.z = targetPos.z;
+        Vector3 currentPosition = rb.position;
+        Vector3 newPosition = currentPosition;
 
-        rb.MovePosition(newPos);
+        newPosition.x = Mathf.Lerp(currentPosition.x, targetPosition.x, laneFollowSpeed * Time.fixedDeltaTime);
+        newPosition.y = Mathf.Lerp(currentPosition.y, targetPosition.y, verticalFollowSpeed * Time.fixedDeltaTime);
+        newPosition.z = targetPosition.z;
+
+        rb.MovePosition(newPosition);
     }
 
     private void ReduceFollowDistance()
@@ -76,19 +87,18 @@ public class FollowPlayer : MonoBehaviour
             yield return null;
         }
 
-        followDistance = targetDistance;
+        followDistance = targetDistance;    
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Ground()
     {
-        if (other.TryGetComponent(out PlayerMovement playerMovement))
-        {
-            hasCaught = true;
-            playerMovement.OnCaught();
-            animator.SetTrigger(GameEvents.Pull);
-            SoundManager.Instance.PlayOneShot(audioClip);
-            OnPlayerCaught?.Invoke();
-        }
+        hasCaught = true;
+    }
+
+    private void PlayerCaught()
+    {
+        animator.SetTrigger(GameEvents.Pull);
+        SoundManager.Instance.PlayOneShot(audioClip);
     }
 
     private void OnFinish()
