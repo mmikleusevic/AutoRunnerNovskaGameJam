@@ -99,11 +99,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if ((Input.GetKeyDown(KeyCode.S) || downPressed))
         {
-            if (IsGrounded())
+            if (IsGrounded() && !IsSliding)
             {
                 slideCoroutine = StartCoroutine(Slide());
             }
-            else
+            else if(!IsGrounded() && !IsSliding)
             {
                 rb.AddForce(-transform.up * (jumpForce * foreDownMultiplier), ForceMode.Impulse);
             }
